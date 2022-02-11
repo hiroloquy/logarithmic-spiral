@@ -1,4 +1,4 @@
-# Log Spiral
+# Logarithmic Spiral
 This gnuplot script is a simulator of **logarithmic spiral** curve.
 
 ## Demo
