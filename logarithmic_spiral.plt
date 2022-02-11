@@ -1,47 +1,54 @@
-# Setting --------------------
 reset
+set angle radians
+
+#=================== Parameter ====================
+a=0.18    # Coefficient of log spiral
+b=0.20
+
+L = 60    # Plot area
+k = 10    # 0 ≦ θ ≦ k*pi [rad]
+n = 20    # Resolution
+N = k*n
+
+#=================== Function ====================
+# Curve
+x(t) = (t>0 ? a*exp(b*t)*cos(t) : 1/0)
+y(t) = (t>0 ? a*exp(b*t)*sin(t) : 1/0)
+
+# Title
+title(a, b, theta) = sprintf("{/:Italic x}({/:Italic θ})={/:Italic ae}^{{/:Italic bθ}}cos{/:Italic θ} ,   \
+{/:Italic y}({/:Italic θ})={/:Italic ae}^{{/:Italic bθ}}sin{/:Italic θ}\n\n\
+{/:Italic a}=%.2f  {/:Italic b}=%.2f  {/:Italic θ}= %d°",a, b, theta)
+
+#=================== Plot ====================
 set nokey
-set term gif animate delay 8 size 854,480
-set output 'logarithmic-spiral.gif'
+set term gif animate delay 5 size 900, 480 font 'Times New Roman, 20'
+set output 'logarithmic_spiral.gif'
 set parametric
 set size ratio -1
 set samples 1e4
-set tics font 'Times New Roman,18'
-set xl 'x({/symbol q})' font 'Latin Modern Math, 20'
-set yl 'y({/symbol q})' font 'Latin Modern Math, 20'
-L = 60
-set xr[-L:L]
-set yr[-L:L]
-set xtics -L, 20, L
-set ytics -L, 20, L
+set xlabel '{/:Italic x}'
+set ylabel '{/:Italic y}'
+set xrange [-L:L]
+set yrange [-L:L]
+set xtics 20 font ', 16'
+set ytics 20 font ', 16'
 set grid
 
-# Function --------------------
-a=0.18
-b=0.20
-x(t) = t<=h? a*exp(b*t)*cos(t): 1/0
-y(t) = t<=h? a*exp(b*t)*sin(t): 1/0
-title(i, a, b) = sprintf("x({/symbol q})=ae^{b{/symbol q}}cos{/symbol q}, \
- y({/symbol q})=ae^{b{/symbol q}}sin{/symbol q}\n\n\
- a=%.2f  b=%.2f  {/symbol q}= %4d °",a, b, 180/20*i)
-
-# Plot --------------------
-n = 10
-set tr[0:n*pi]
-N = 20*n
-do for [i=0:30]{
- set title title(0, a, b) font 'Latin Modern Math, 20'
- h = pi/20 * 0
- plot x(t), y(t) lw 1 lc 6,\
-  x(h), y(h) with points pt 7 ps 1 lc 6
+# Stop animation for 30 frames
+do for [i=1:30]{
+  set title title(a, b, 0)
+  h = pi/n * 0
+  set trange [0:h]
+  plot x(t), y(t) lw 1 lc 6, x(h), y(h) with points pt 7 ps 1 lc 6
 }
 
+# Update animation for N frames
 do for [i=1:N]{
- set title title(i, a, b) font 'Latin Modern Math, 20'
- h = pi/20 * i
- plot x(t), y(t) lw 1 lc 6,\
-  x(h), y(h) with points pt 7 ps 1 lc 6
+  set title title(a, b, 180/n*i)  # [deg]
+  h = pi/n * i                    # [rad]
+  set trange [0:h]
+  plot x(t), y(t) lw 1 lc 6, x(h), y(h) with points pt 7 ps 1 lc 6
 }
 
 set out
-set terminal wxt enhanced
