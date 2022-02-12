@@ -12,8 +12,8 @@ N = k*n
 
 #=================== Function ====================
 # Curve
-x(t) = (t>0 ? a*exp(b*t)*cos(t) : 1/0)
-y(t) = (t>0 ? a*exp(b*t)*sin(t) : 1/0)
+x(t) = a*exp(b*t)*cos(t)
+y(t) = a*exp(b*t)*sin(t)
 
 # Title
 title(a, b, theta) = sprintf("{/:Italic x}({/:Italic θ})={/:Italic ae}^{{/:Italic bθ}}cos{/:Italic θ} ,   \
