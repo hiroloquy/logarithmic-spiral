@@ -7,8 +7,14 @@ This gnuplot script is a simulator of **logarithmic spiral** curve.
 |**logarithmic_spiral.gif**|
 
 ## Equations
-<img src="https://render.githubusercontent.com/render/math?math=%5CLarge+%5Cdisplaystyle+x%28%5Ctheta%29+%3Dae%5E%7Bb%5Ctheta%7D%5Ccos%5Ctheta%5Cqquad%0Ay%28%5Ctheta%29+%3Dae%5E%7Bb%5Ctheta%7D%5Csin%5Ctheta" alt="x(\theta) =ae^{b\theta}\cos\theta\qquad y(\theta) =ae^{b\theta}\sin\theta">
-
+$$
+\left\{
+    \begin{align*}
+        x(\theta) &= ae^{b\theta}\cos\theta\qquad\\
+        y(\theta) &= ae^{b\theta}\sin\theta
+    \end{align*}
+\right.
+$$
 
 <!-- ## Features
 You enable to switch terminal type `qt` or `pngcairo` by using **`qtMode`**.
